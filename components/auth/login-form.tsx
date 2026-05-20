@@ -17,6 +17,7 @@ export function LoginForm() {
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
   const [signupConfirm, setSignupConfirm] = useState("");
+  const [showSignup, setShowSignup] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [messageType, setMessageType] = useState<"success" | "error">("error");
   const [loadingAction, setLoadingAction] = useState<"login" | "signup" | null>(null);
@@ -108,6 +109,11 @@ export function LoginForm() {
     setMessage(text);
   }
 
+  function toggleSignup() {
+    setShowSignup((current) => !current);
+    setMessage(null);
+  }
+
   return (
     <div className="space-y-4">
       <Card>
@@ -137,56 +143,65 @@ export function LoginForm() {
           <Button className="w-full" onClick={login} disabled={loadingAction !== null}>
             {loadingAction === "login" ? "Entrando..." : "Entrar"}
           </Button>
+          <button
+            type="button"
+            className="w-full text-center text-xs font-medium text-muted-foreground transition-colors hover:text-primary"
+            onClick={toggleSignup}
+          >
+            {showSignup ? "Ocultar cadastro" : "Cadastrar acesso inicial"}
+          </button>
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Criar conta</CardTitle>
-          <CardDescription>Cadastre-se para acessar o centro operacional.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="signup-name">Nome</Label>
-            <Input
-              id="signup-name"
-              type="text"
-              value={signupName}
-              onChange={(event) => setSignupName(event.target.value)}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="signup-email">E-mail</Label>
-            <Input
-              id="signup-email"
-              type="email"
-              value={signupEmail}
-              onChange={(event) => setSignupEmail(event.target.value)}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="signup-password">Senha</Label>
-            <Input
-              id="signup-password"
-              type="password"
-              value={signupPassword}
-              onChange={(event) => setSignupPassword(event.target.value)}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="signup-confirm">Confirmar senha</Label>
-            <Input
-              id="signup-confirm"
-              type="password"
-              value={signupConfirm}
-              onChange={(event) => setSignupConfirm(event.target.value)}
-            />
-          </div>
-          <Button className="w-full" onClick={signup} disabled={loadingAction !== null}>
-            {loadingAction === "signup" ? "Criando conta..." : "Cadastrar"}
-          </Button>
-        </CardContent>
-      </Card>
+      {showSignup ? (
+        <Card>
+          <CardHeader>
+            <CardTitle>Criar acesso inicial</CardTitle>
+            <CardDescription>Use apenas para cadastrar o primeiro acesso autorizado.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="signup-name">Nome</Label>
+              <Input
+                id="signup-name"
+                type="text"
+                value={signupName}
+                onChange={(event) => setSignupName(event.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="signup-email">E-mail</Label>
+              <Input
+                id="signup-email"
+                type="email"
+                value={signupEmail}
+                onChange={(event) => setSignupEmail(event.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="signup-password">Senha</Label>
+              <Input
+                id="signup-password"
+                type="password"
+                value={signupPassword}
+                onChange={(event) => setSignupPassword(event.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="signup-confirm">Confirmar senha</Label>
+              <Input
+                id="signup-confirm"
+                type="password"
+                value={signupConfirm}
+                onChange={(event) => setSignupConfirm(event.target.value)}
+              />
+            </div>
+            <Button className="w-full" onClick={signup} disabled={loadingAction !== null}>
+              {loadingAction === "signup" ? "Criando conta..." : "Cadastrar"}
+            </Button>
+          </CardContent>
+        </Card>
+      ) : null}
 
       {message ? (
         <p className={cn("text-sm", messageType === "success" ? "text-success" : "text-destructive")}>

@@ -7,7 +7,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="mb-8">
           <AureonLogo />
-          <h1 className="mt-6 text-3xl font-semibold tracking-normal">Entre ou crie sua conta</h1>
+          <h1 className="mt-6 text-3xl font-semibold tracking-normal">Acesso operacional</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Acesso protegido por Supabase Auth, organizacoes e permissoes por usuario.
           </p>
