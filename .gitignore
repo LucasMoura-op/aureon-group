@@ -1,0 +1,12 @@
+.env
+.env.local
+.env.*.local
+.next/
+node_modules/
+dist/
+out/
+coverage/
+.vercel/
+*.log
+*.tsbuildinfo
+copiloto-dashboard.png
