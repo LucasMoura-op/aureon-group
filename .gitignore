@@ -12,3 +12,4 @@ coverage/
 copiloto-dashboard.png
 
 .vercel
+supabase/.temp/
