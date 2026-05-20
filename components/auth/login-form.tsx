@@ -96,7 +96,18 @@ export function LoginForm() {
       return;
     }
 
-    showSuccess("Cadastro criado. Verifique seu e-mail para confirmar o acesso.");
+    const { error: loginError } = await supabase.auth.signInWithPassword({
+      email: signupEmail,
+      password: signupPassword
+    });
+
+    if (!loginError) {
+      router.push("/app");
+      router.refresh();
+      return;
+    }
+
+    showSuccess("Cadastro criado. Agora entre usando o e-mail e a senha cadastrados.");
   }
 
   function showError(text: string) {
